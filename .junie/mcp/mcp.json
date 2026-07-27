@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/Users/lceron/.config/herd-lite/bin/php",
+            "args": [
+                "/Users/lceron/Projects/Php/crud-laravel-vue-inertia/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
