@@ -5,10 +5,10 @@ import type { ColumnDef, RowSelectionState } from '@tanstack/vue-table';
 import { FlexRender } from '@tanstack/vue-table';
 import { useTable } from '@tanstack/vue-table';
 import { ref } from 'vue';
-import type { Payment } from '@/components/Products/columns';
-import { DefineTemplate } from '@/components/Products/columns';
-import { features } from '@/components/Products/features';
-import type { DataTableFeatures } from '@/components/Products/features';
+import type { Payment } from '@/components/Payment/columns';
+import { DefineTemplate } from '@/components/Payment/columns';
+import { features } from '@/components/Payment/features';
+import type { DataTableFeatures } from '@/components/Payment/features';
 import { Button } from '@/components/ui/button';
 
 import {
@@ -26,7 +26,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { products } from '@/routes';
+import { payment } from '@/routes';
 
 const rowSelection = ref<RowSelectionState>({});
 const props = defineProps<{
@@ -66,8 +66,8 @@ defineOptions({
     layout: {
         breadcrumbs: [
             {
-                title: 'Products',
-                href: products(),
+                title: 'Payment',
+                href: payment(),
             },
         ],
     },
