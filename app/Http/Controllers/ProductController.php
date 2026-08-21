@@ -16,7 +16,7 @@ class ProductController extends Controller
         sleep(1);
         $products = Products::get();
 
-        return Inertia::render('Products/Index', [
+        return Inertia::render('Payment/Index', [
             'products' => $products,
         ]);
     }
