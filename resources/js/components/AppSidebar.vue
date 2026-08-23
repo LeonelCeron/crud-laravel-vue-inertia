@@ -14,7 +14,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, payment } from '@/routes';
+import { dashboard, payment, product } from '@/routes';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -26,6 +26,11 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Payment',
         href: payment(),
+        icon: UserIcon,
+    },
+    {
+        title: 'Products',
+        href: product(),
         icon: UserIcon,
     },
 ];
