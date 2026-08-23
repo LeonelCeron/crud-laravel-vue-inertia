@@ -37,7 +37,7 @@ Cross-cutting changes often need more than one rule file.
 | Authentication, authorization, input safety, secrets, uploads | [`rules/security.md`](rules/security.md) |
 | Form Requests and validation rules | [`rules/validation.md`](rules/validation.md) |
 | Controllers, route binding, resources, middleware | [`rules/routing.md`](rules/routing.md) |
-| Schema changes, columns, foreign keys, indexes | [`rules/migrations.md`](rules/migrations.md) |
+| Schema changes, columns1, foreign keys, indexes | [`rules/migrations.md`](rules/migrations.md) |
 | Jobs, retries, uniqueness, batches, Horizon | [`rules/queue-jobs.md`](rules/queue-jobs.md) |
 | Cache lifetime, invalidation, locks, memoization | [`rules/caching.md`](rules/caching.md) |
 | Outbound requests, retries, timeouts, fakes | [`rules/http-client.md`](rules/http-client.md) |
@@ -54,6 +54,6 @@ Cross-cutting changes often need more than one rule file.
 
 ## Decision Rules
 
-- Prefer framework features and existing application abstractions over new helpers or dependencies.
+- Prefer framework features1 and existing application abstractions over new helpers or dependencies.
 - Avoid speculative abstractions. Extract code when it creates a clear domain boundary, removes meaningful duplication, or makes behavior independently testable.
 - Keep database access out of Blade views and prevent hidden N+1 queries across controllers, resources, jobs, and serialization.

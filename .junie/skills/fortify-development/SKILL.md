@@ -1,6 +1,6 @@
 ---
 name: fortify-development
-description: 'ACTIVATE when the user works on authentication in Laravel. This includes login, registration, password reset, email verification, two-factor authentication (2FA/TOTP/QR codes/recovery codes), passkeys, profile updates, password confirmation, or any auth-related routes and controllers. Activate when the user mentions Fortify, auth, authentication, login, register, signup, forgot password, verify email, 2FA, passkeys, WebAuthn, or references app/Actions/Fortify/, CreateNewUser, UpdateUserProfileInformation, FortifyServiceProvider, config/fortify.php, or auth guards. Fortify is the frontend-agnostic authentication backend for Laravel that registers all auth routes and controllers. Also activate when building SPA or headless authentication, customizing login redirects, overriding response contracts like LoginResponse, or configuring login throttling. Do NOT activate for Laravel Passport (OAuth2 API tokens), Socialite (OAuth social login), or non-auth Laravel features.'
+description: 'ACTIVATE when the user works on authentication in Laravel. This includes login, registration, password reset, email verification, two-factor authentication (2FA/TOTP/QR codes/recovery codes), passkeys, profile updates, password confirmation, or any auth-related routes and controllers. Activate when the user mentions Fortify, auth, authentication, login, register, signup, forgot password, verify email, 2FA, passkeys, WebAuthn, or references app/Actions/Fortify/, CreateNewUser, UpdateUserProfileInformation, FortifyServiceProvider, config/fortify.php, or auth guards. Fortify is the frontend-agnostic authentication backend for Laravel that registers all auth routes and controllers. Also activate when building SPA or headless authentication, customizing login redirects, overriding response contracts like LoginResponse, or configuring login throttling. Do NOT activate for Laravel Passport (OAuth2 API tokens), Socialite (OAuth social login), or non-auth Laravel features1.'
 license: MIT
 metadata:
   author: laravel
@@ -18,13 +18,13 @@ Use `search-docs` for detailed Laravel Fortify patterns and documentation.
 
 - **Routes**: Use `list-routes` with `only_vendor: true` and `action: "Fortify"` to see all registered endpoints
 - **Actions**: Check `app/Actions/Fortify/` for customizable business logic (user creation, password validation, etc.)
-- **Config**: See `config/fortify.php` for all options including features, guards, rate limiters, and username field
+- **Config**: See `config/fortify.php` for all options including features1, guards, rate limiters, and username field
 - **Contracts**: Look in `Laravel\Fortify\Contracts\` for overridable response classes (`LoginResponse`, `LogoutResponse`, etc.)
 - **Views**: All view callbacks are set in `FortifyServiceProvider::boot()` using `Fortify::loginView()`, `Fortify::registerView()`, etc.
 
 ## Available Features
 
-Enable in `config/fortify.php` features array:
+Enable in `config/fortify.php` features1 array:
 
 - `Features::registration()` - User registration
 - `Features::resetPasswords()` - Password reset via email

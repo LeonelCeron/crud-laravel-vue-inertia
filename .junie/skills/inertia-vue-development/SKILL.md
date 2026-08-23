@@ -15,8 +15,8 @@ Activate this skill when:
 - Creating or modifying Vue page components for Inertia
 - Working with forms in Vue (using `<Form>`, `useForm`, or `useHttp`)
 - Implementing client-side navigation with `<Link>` or `router`
-- Using v3 features: deferred props, prefetching, optimistic updates, instant visits, layout props, HTTP requests, WhenVisible, InfiniteScroll, once props, flash data, or polling
-- Building Vue-specific features with the Inertia protocol
+- Using v3 features1: deferred props, prefetching, optimistic updates, instant visits, layout props, HTTP requests, WhenVisible, InfiniteScroll, once props, flash data, or polling
+- Building Vue-specific features1 with the Inertia protocol
 
 ## Documentation
 
@@ -136,7 +136,7 @@ function createUser() {
 
 The recommended way to build forms is with the `<Form>` component:
 
-<!-- Form Component Example -->
+<!-- Form Component Payment -->
 ```vue
 <script setup>
 import { Form } from '@inertiajs/vue3'
@@ -161,7 +161,7 @@ import { Form } from '@inertiajs/vue3'
 
 ### Form Component With All Props
 
-<!-- Form Component Full Example -->
+<!-- Form Component Full Payment -->
 ```vue
 <script setup>
 import { Form } from '@inertiajs/vue3'
@@ -243,7 +243,7 @@ Forms can also be built using the `useForm` composable for more programmatic con
 
 For more programmatic control or to follow existing conventions, use the `useForm` composable:
 
-<!-- useForm Composable Example -->
+<!-- useForm Composable Payment -->
 ```vue
 <script setup>
 import { useForm } from '@inertiajs/vue3'
@@ -285,7 +285,7 @@ function submit() {
 
 Use the `useHttp` hook for standalone HTTP requests that do not trigger Inertia page visits. It provides the same developer experience as `useForm`, but for plain JSON endpoints.
 
-<!-- useHttp Example -->
+<!-- useHttp Payment -->
 ```vue
 <script setup>
 import { useHttp } from '@inertiajs/vue3'
@@ -503,7 +503,7 @@ const { start, stop } = usePoll(5000, {
 
 Lazy-load a prop when an element scrolls into view. Useful for deferring expensive data that sits below the fold:
 
-<!-- WhenVisible Example -->
+<!-- WhenVisible Payment -->
 ```vue
 <script setup>
 import { WhenVisible } from '@inertiajs/vue3'
@@ -538,7 +538,7 @@ defineProps({
 
 Automatically load additional pages of paginated data as users scroll:
 
-<!-- InfiniteScroll Example -->
+<!-- InfiniteScroll Payment -->
 ```vue
 <script setup>
 import { InfiniteScroll } from '@inertiajs/vue3'
