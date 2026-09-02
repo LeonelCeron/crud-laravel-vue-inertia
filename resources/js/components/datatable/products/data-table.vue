@@ -1,16 +1,16 @@
 <script setup lang="ts">
 // Keep row selection outside the table so the rest of the app can read or update it.
-import { ChevronDown, SquarePen, Trash2 } from '@lucide/vue';
+import { ChevronDown, SquarePen } from '@lucide/vue';
 import type { ColumnDef, RowSelectionState } from '@tanstack/vue-table';
 import { FlexRender } from '@tanstack/vue-table';
 import { useTable } from '@tanstack/vue-table';
 import { ref } from 'vue';
 import type { Product } from '@/components/datatable/products/columns';
 import { DefineTemplate } from '@/components/datatable/products/columns';
+import Edit from '@/components/datatable/products/Edit.vue';
 import { features } from '@/components/Payment/features';
 import type { DataTableFeatures } from '@/components/Payment/features';
 import { Button } from '@/components/ui/button';
-
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -76,17 +76,10 @@ defineOptions({
 
 <template>
     <DefineTemplate v-slot="{ data }">
+        <Edit :key="data.id" :products="data" />
         <Button class="ml-2 h-8 w-20" @click="printIDSelected(data)">
             <SquarePen />
             Edit
-        </Button>
-        <Button
-            class="ml-2 h-8 w-20"
-            variant="destructive"
-            @click="copy(data.id)"
-        >
-            <Trash2 />
-            Delete
         </Button>
     </DefineTemplate>
 
@@ -103,7 +96,7 @@ defineOptions({
                 "
             />
             <div class="ml-auto">
-                <Button class="ml-2 mr-2 w-20"> Add </Button>
+                <Button class="mr-2 ml-2 w-20"> Add </Button>
 
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>

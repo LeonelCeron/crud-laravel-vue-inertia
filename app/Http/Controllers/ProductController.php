@@ -13,7 +13,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        sleep(1);
         $products = Products::get();
 
         return Inertia::render('Products/Index', [
@@ -58,7 +57,25 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'quantity' => 'nullable|integer|min:0',
+            'price' => 'nullable|numeric|min:0',
+        ]);
+
+        $product = Products::find($id);
+        if (! $product) {
+            return redirect()->route('product')->with('error', 'Product not found.');
+        }
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->quantity = $request->input('quantity', $product->quantity);
+        $product->price = $request->input('price', $product->price);
+        $product->save();
+
+        return redirect()->route('product');
     }
 
     /**
