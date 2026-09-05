@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -13,19 +15,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Products::get();
+        $products = Products::visible()->get();
 
         return Inertia::render('Products/Index', [
             'data' => $products,
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -36,53 +30,42 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
-        //
-    }
+        $product = $this->findProductOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'quantity' => 'nullable|integer|min:0',
-            'price' => 'nullable|numeric|min:0',
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:1000'],
+            'quantity' => ['nullable', 'integer', 'min:0'],
+            'price' => ['nullable', 'numeric', 'min:0'],
         ]);
-
-        $product = Products::find($id);
-        if (! $product) {
-            return redirect()->route('product')->with('error', 'Product not found.');
-        }
-
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->quantity = $request->input('quantity', $product->quantity);
-        $product->price = $request->input('price', $product->price);
+        $product->fill([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'quantity' => $validated['quantity'] ?? $product->quantity,
+            'price' => $validated['price'] ?? $product->price,
+        ]);
         $product->save();
 
-        return redirect()->route('product');
+        return redirect()->route('product')->with('success', 'Product updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function updateStatus(Request $request, string $id): RedirectResponse
     {
-        //
+        $product = $this->findProductOrFail($id);
+
+        $validated = $request->validate([
+            'status' => ['required', Rule::in(Products::STATUSES)],
+        ]);
+
+        $product->updateStatus($validated['status']);
+
+        return redirect()->route('product')->with('success', 'Product status updated successfully.');
+    }
+
+    private function findProductOrFail(string $id): Products
+    {
+        return Products::findOrFail($id);
     }
 }
