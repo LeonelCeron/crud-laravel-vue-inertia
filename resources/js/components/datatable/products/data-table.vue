@@ -7,6 +7,7 @@ import { useTable } from '@tanstack/vue-table';
 import { ref } from 'vue';
 import type { Product } from '@/components/datatable/products/columns';
 import { DefineTemplate } from '@/components/datatable/products/columns';
+import Delete from '@/components/datatable/products/Delete.vue';
 import Edit from '@/components/datatable/products/Edit.vue';
 import { features } from '@/components/Payment/features';
 import type { DataTableFeatures } from '@/components/Payment/features';
@@ -55,13 +56,6 @@ const table = useTable({
     },
 });
 
-function copy(id: number) {
-    navigator.clipboard.writeText(id.toString());
-}
-function printIDSelected(pay: Product) {
-    console.log('This is a test from console', pay);
-}
-
 defineOptions({
     layout: {
         breadcrumbs: [
@@ -77,10 +71,7 @@ defineOptions({
 <template>
     <DefineTemplate v-slot="{ data }">
         <Edit :key="data.id" :products="data" />
-        <Button class="ml-2 h-8 w-20" @click="printIDSelected(data)">
-            <SquarePen />
-            Edit
-        </Button>
+        <Delete :key="data.id" :products="data" />
     </DefineTemplate>
 
     <div class="mr-1 ml-1 w-full">
