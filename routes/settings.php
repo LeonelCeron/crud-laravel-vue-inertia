@@ -15,7 +15,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('payment', [ProductController::class, 'index'])->name('payment');
 
     Route::get('products', [ProductController::class, 'index'])->name('product');
-    Route::put('products/{id}/', [ProductController::class, 'update'])->name('product.update');
+    Route::put('products/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::patch('products/{id}/status', [ProductController::class, 'updateStatus'])->name('products.update.status');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
