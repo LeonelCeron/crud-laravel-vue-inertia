@@ -8,17 +8,18 @@ import { toast } from 'vue-sonner';
 import { z } from 'zod';
 import { update } from '@/actions/App/Http/Controllers/ProductController';
 import type { Product } from '@/components/datatable/products/columns';
-import {
-    AlertDialog,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
 
+import { Button } from '@/components/ui/button';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 import {
     Field,
     FieldError,
@@ -112,18 +113,18 @@ const onSubmit = handleSubmit(() => {
 </script>
 
 <template>
-    <AlertDialog :open="isOpen" @update:open="onOpenDialog">
-        <AlertDialogTrigger as-child>
+    <Dialog :open="isOpen" @update:open="onOpenDialog">
+        <DialogTrigger as-child>
             <Button class="ml-2 h-8 w-20">
                 <SquarePen />
                 Edit
             </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-            <AlertDialogHeader>
-                <AlertDialogTitle>Edit product</AlertDialogTitle>
+        </DialogTrigger>
+        <DialogContent>
+            <DialogHeader>
+                <DialogTitle>Edit product</DialogTitle>
 
-                <AlertDialogDescription>
+                <DialogDescription>
                     <form id="form-vee-demo" @submit="onSubmit">
                         <FieldGroup>
                             <VeeField
@@ -172,10 +173,10 @@ const onSubmit = handleSubmit(() => {
                             </VeeField>
                         </FieldGroup>
                     </form>
-                </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-                <Field orientation="horizontal">
+                </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+                <DialogClose as-child>
                     <Button
                         type="button"
                         variant="outline"
@@ -183,21 +184,21 @@ const onSubmit = handleSubmit(() => {
                     >
                         Reset
                     </Button>
-                    <Button
-                        type="submit"
-                        size="sm"
-                        form="form-vee-demo"
-                        :disabled="form.processing"
-                    >
-                        <span v-if="form.processing" class="spinner">
-                            Loading
-                        </span>
-                        <span v-else>Submit</span>
-                    </Button>
-                </Field>
-            </AlertDialogFooter>
-        </AlertDialogContent>
-    </AlertDialog>
+                </DialogClose>
+                <Button
+                    type="submit"
+                    size="sm"
+                    form="form-vee-demo"
+                    :disabled="form.processing"
+                >
+                    <span v-if="form.processing" class="spinner">
+                        Loading
+                    </span>
+                    <span v-else>Submit</span>
+                </Button>
+            </DialogFooter>
+        </DialogContent>
+    </Dialog>
 </template>
 
 <style scoped></style>
