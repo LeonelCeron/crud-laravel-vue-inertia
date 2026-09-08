@@ -7,6 +7,7 @@ import { useTable } from '@tanstack/vue-table';
 import { ref } from 'vue';
 import type { Product } from '@/components/datatable/products/columns';
 import { DefineTemplate } from '@/components/datatable/products/columns';
+import Create from '@/components/datatable/products/Create.vue';
 import Delete from '@/components/datatable/products/Delete.vue';
 import Edit from '@/components/datatable/products/Edit.vue';
 import { features } from '@/components/Payment/features';
@@ -86,12 +87,11 @@ defineOptions({
                     table.getColumn('name')?.setFilterValue($event)
                 "
             />
-            <div class="ml-auto">
-                <Button class="mr-2 ml-2 w-20"> Add </Button>
-
+            <div class="ml-auto flex items-center gap-2">
+                <Create/>
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
-                        <Button variant="outline" class="ml-auto">
+                        <Button variant="outline" class="h-8">
                             Columns <ChevronDown class="ml-2 h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
