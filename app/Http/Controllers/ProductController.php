@@ -27,7 +27,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:1000'],
+            'quantity' => ['nullable', 'integer', 'min:0'],
+            'price' => ['nullable', 'numeric', 'min:0'],
+        ]);
+
+        Products::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'quantity' => $validated['quantity'] ?? 0,
+            'price' => $validated['price'] ?? 0,
+            'status' => Products::STATUS_ACTIVE,
+        ]);
+
+        return redirect()->route('product')->with('success', 'Product created successfully.');
     }
 
     public function update(Request $request, string $id): RedirectResponse
@@ -59,7 +74,11 @@ class ProductController extends Controller
             'status' => ['required', Rule::in(Products::STATUSES)],
         ]);
 
-        $product->updateStatus($validated['status']);
+        $status = $validated['status'] === Products::STATUS_DELETED
+            ? Products::STATUS_INACTIVE
+            : $validated['status'];
+
+        $product->updateStatus($status);
 
         return redirect()->route('product')->with('success', 'Product status updated successfully.');
     }
