@@ -1,18 +1,16 @@
 <script setup lang="ts">
 // Keep row selection outside the table so the rest of the app can read or update it.
-import { ChevronDown, SquarePen } from '@lucide/vue';
+import { ChevronDown, SquarePen, Trash2 } from '@lucide/vue';
 import type { ColumnDef, RowSelectionState } from '@tanstack/vue-table';
 import { FlexRender } from '@tanstack/vue-table';
 import { useTable } from '@tanstack/vue-table';
 import { ref } from 'vue';
-import type { Product } from '@/components/datatable/products/columns';
-import { DefineTemplate } from '@/components/datatable/products/columns';
-import Create from '@/components/datatable/products/Create.vue';
-import Delete from '@/components/datatable/products/Delete.vue';
-import Edit from '@/components/datatable/products/Edit.vue';
-import { features } from '@/components/Payment/features';
-import type { DataTableFeatures } from '@/components/Payment/features';
+import type { Payment } from '@/components/modules/Payment/columns';
+import { DefineTemplate } from '@/components/modules/Payment/columns';
+import { features } from '@/components/modules/Payment/features';
+import type { DataTableFeatures } from '@/components/modules/Payment/features';
 import { Button } from '@/components/ui/button';
+
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -32,8 +30,8 @@ import { payment } from '@/routes';
 
 const rowSelection = ref<RowSelectionState>({});
 const props = defineProps<{
-    columns: ColumnDef<DataTableFeatures, Product>[];
-    data: Product[];
+    columns: ColumnDef<DataTableFeatures, Payment>[];
+    data: Payment[];
 }>();
 
 const table = useTable({
@@ -57,6 +55,13 @@ const table = useTable({
     },
 });
 
+function copy(id: string) {
+    navigator.clipboard.writeText(id);
+}
+function printIDSelected(pay: Payment) {
+    console.log('This is a test from console', pay);
+}
+
 defineOptions({
     layout: {
         breadcrumbs: [
@@ -70,28 +75,39 @@ defineOptions({
 </script>
 
 <template>
-    <DefineTemplate v-slot="{ data }">
-        <Edit :key="data.id" :products="data" />
-        <Delete :key="data.id" :products="data" />
+    <DefineTemplate v-slot="{ dataExample }">
+        <Button class="ml-2 h-8 w-20" @click="printIDSelected(dataExample)">
+            <SquarePen />
+            Edit
+        </Button>
+        <Button
+            class="ml-2 h-8 w-20"
+            variant="destructive"
+            @click="copy(dataExample.id)"
+        >
+            <Trash2 />
+            Delete
+        </Button>
     </DefineTemplate>
 
     <div class="mr-1 ml-1 w-full">
         <div class="flex items-center py-4">
             <Input
                 class="max-w-sm"
-                placeholder="Filter products..."
+                placeholder="Filter emails..."
                 :model-value="
-                    table.getColumn('name')?.getFilterValue() as string
+                    table.getColumn('email')?.getFilterValue() as string
                 "
                 @update:model-value="
-                    table.getColumn('name')?.setFilterValue($event)
+                    table.getColumn('email')?.setFilterValue($event)
                 "
             />
-            <div class="ml-auto flex items-center gap-2">
-                <Create/>
+            <div class="ml-auto">
+                <Button> Add </Button>
+
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
-                        <Button variant="outline" class="h-8">
+                        <Button variant="outline" class="ml-auto">
                             Columns <ChevronDown class="ml-2 h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>

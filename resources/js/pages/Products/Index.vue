@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
-import { columns } from '@/components/datatable/products/columns';
-import DataTable from '@/components/datatable/products/data-table.vue';
+import { columns } from '@/components/modules/products/datatable/columns';
+import DataTable from '@/components/modules/products/datatable/data-table.vue';
 import { product } from '@/routes';
 
 defineProps({

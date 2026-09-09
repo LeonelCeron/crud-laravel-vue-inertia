@@ -7,7 +7,7 @@ import { ref, watch } from 'vue';
 import { toast } from 'vue-sonner';
 import { z } from 'zod';
 import { update } from '@/actions/App/Http/Controllers/ProductController';
-import type { Product } from '@/components/datatable/products/columns';
+import type { Product } from '@/components/modules/products/datatable/columns';
 
 import { Button } from '@/components/ui/button';
 import {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 import { onMounted, ref } from 'vue';
-import type { Payment } from '@/components/Payment/columns';
-import { columns } from '@/components/Payment/columns';
-import DataTable from '@/components/Payment/data-table.vue';
+import type { Payment } from '@/components/modules/Payment/columns';
+import { columns } from '@/components/modules/Payment/columns';
+import DataTable from '@/components/modules/Payment/data-table.vue';
 import { payment } from '@/routes';
 
 const data = ref<Payment[]>([]);

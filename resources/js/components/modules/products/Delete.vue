@@ -2,7 +2,7 @@
 import { router } from '@inertiajs/vue3';
 import { Trash2 } from '@lucide/vue';
 import { toast } from 'vue-sonner';
-import type { Product } from '@/components/datatable/products/columns';
+import type { Product } from '@/components/modules/products/datatable/columns';
 
 import { Button } from '@/components/ui/button';
 import {
