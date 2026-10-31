@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { router } from '@inertiajs/vue3';
 import { Trash2 } from '@lucide/vue';
+import { ref } from 'vue';
 import { toast } from 'vue-sonner';
 import type { Product } from '@/components/modules/products/datatable/columns';
 
@@ -16,6 +17,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 
+const open = ref(true);
 const props = defineProps<{
     products: Product;
 }>();
@@ -28,6 +30,7 @@ const handleDelete = () => {
         },
         {
             onSuccess: () => {
+                open.value = false;
                 toast.success(
                     'Product with ID ' +
                         props.products.id +
@@ -67,7 +70,9 @@ const handleDelete = () => {
                 <DialogClose as-child>
                     <Button variant="outline"> Cancel </Button>
                 </DialogClose>
+                <DialogClose as-child>
                 <Button @click="handleDelete"> Delete </Button>
+                </DialogClose>
             </DialogFooter>
         </DialogContent>
     </Dialog>

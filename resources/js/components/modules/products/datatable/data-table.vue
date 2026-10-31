@@ -44,6 +44,12 @@ const table = useTable({
     get columns() {
         return props.columns;
     },
+    initialState: {
+        columnVisibility: {
+            created_at: false,
+            updated_at: false,
+        },
+    },
     state: {
         get rowSelection() {
             return rowSelection.value;
@@ -88,7 +94,7 @@ defineOptions({
                 "
             />
             <div class="ml-auto flex items-center gap-2">
-                <Create/>
+                <Create />
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                         <Button variant="outline" class="h-8">
